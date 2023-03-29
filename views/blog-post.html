@@ -1,7 +1,7 @@
 {% macro blogPostPage() %}
 <!doctype html>
 <meta charset="utf-8" />
-<title>{{ entity.summary | safe}}</title>
+<title>{{ entity.summary | striptags }}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="/public.css" />
 <header class="header">
