@@ -1,0 +1,98 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>My Blog - Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="/main.css" />
+<details>
+  <summary>
+    Edit Profile
+  </summary>
+  <form
+    novalidate
+    action="{{ actor.outbox.url }}"
+    method="POST"
+    data-action="edit-profile"
+    data-actor-id="{{ actor.id }}"
+    data-followers-url="{{ actor.followers }}">
+    <label class="label">
+      <span class="label-text">
+        Username
+      </span>
+      <input
+        readonly
+        type="text"
+        value="@{{ actor.preferredUsername }}"
+        name="username"
+      />
+    </label>
+    <label class="label">
+      <span class="label-text">
+        Name
+      </span>
+      <input
+        type="text"
+        value="{{ actor.name }}"
+        name="name"
+      />
+    </label>
+    <label class="label">
+      <span class="label-text">
+        Description
+      </span>
+      <textarea name="summary" rows="4">{{ actor.summary }}</textarea>
+    </label>
+    <button type="submit" class="button">
+      Save Profile
+    </button>
+  </form>
+</details>
+
+<details open>
+  <summary>
+    Microblog Status
+  </summary>
+  <form
+    novalidate
+    action="{{ actor.outbox.url }}"
+    data-action="new-microblog-status"
+    method="POST"
+    data-actor-id="{{ actor.id }}"
+    data-followers-url="{{ actor.followers }}">
+    <label class="label">
+      <textarea name="content" rows="6" aria-label="Microblog Status"></textarea>
+    </label>
+    <button type="submit">
+      Post
+    </button>
+  </form>
+</details>
+
+<details open>
+  <summary>
+    New Blog Post
+  </summary>
+  <form
+    novalidate
+    action="{{ actor.outbox.url }}"
+    data-action="new-blog-post"
+    method="POST"
+    data-actor-id="{{ actor.id }}"
+    data-followers-url="{{ actor.followers }}">
+    <label class="label">
+      <span class="label-text">
+        Title
+      </span>
+      <input type="text" name="summary" />
+    </label>
+    <label class="label">
+      <span class="label-text">
+        Body
+      </span>
+      <textarea name="content" rows="6"></textarea>
+    </label>
+    <button type="submit">
+      Post
+    </button>
+  </form>
+</details>
+<script type="module" src="/home.js"></script>

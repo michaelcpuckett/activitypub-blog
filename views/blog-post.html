@@ -1,0 +1,20 @@
+{% macro blogPostPage() %}
+<!doctype html>
+<meta charset="utf-8" />
+<title>{{ entity.summary }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<main>
+  <h1>
+    {{ entity.summary }}
+  </h1>
+  <time datetime="{{ entity.published | formatDate }}">
+    {{ entity.published | formatDate }}
+  </time>
+  {{ entity.content | safe }}
+</main>
+<footer>
+  <a href="/">
+    Home
+  </a>
+</footer>
+{% endmacro %}

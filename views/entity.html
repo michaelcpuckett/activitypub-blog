@@ -1,0 +1,16 @@
+{% from "profile.html" import profilePage with context %}
+{% from "outbox.html" import outboxPage with context %}
+{% from "blog-post.html" import blogPostPage with context %}
+{% from "microblog-status.html" import microblogStatusPage with context %}
+
+{% if entity.type == 'Person' %}
+  {{ profilePage() }}
+{% elif entity.name == 'Outbox' %}
+  {{ outboxPage() }}
+{% elif entity.type === 'Article' %}
+  {{ blogPostPage() }}
+{% elif entity.type === 'Note' %}
+  {{ microblogStatusPage() }}
+{% else %}
+  Entity.
+{% endif %}

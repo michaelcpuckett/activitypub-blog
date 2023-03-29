@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+}
+
+.label {
+  display: block;
+}
+
+.label-text {
+  display: block;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: .5em;
+  font: inherit;
+}
