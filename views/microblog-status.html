@@ -1,9 +1,20 @@
 {% macro microblogStatusPage() %}
 <!doctype html>
 <meta charset="utf-8" />
-<title>{{ entity.name }}'s Microblog - {{ entity.published }}</title>
+<title>{{ entity.content }}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="/public.css" />
 <main>
-  {{ entity.content }}
+  <time datetime="{{ entity.published | formatDateTime }}">
+    {{ entity.published | formatDateTimeForDisplay }}
+  </time>
+  <p>
+    {{ entity.content | safe }}
+  </p>
 </main>
+<footer>
+  <a href="/">
+    Home
+  </a>
+</footer>
 {% endmacro %}

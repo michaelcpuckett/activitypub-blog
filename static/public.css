@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: rgb(29, 24, 24);
+  color: rgb(255, 255, 255);
+  color-scheme: dark;
+}
+
+body {
+  margin: 1em;
+}
+
+a {
+  color: pink;
+}
+
+time {
+  font-variant-numeric: tabular-nums;
+}
+
+h1 {
+  font-weight: 500;
+}
+
+.header {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1em;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header,
+main,
+footer {
+  max-width: 720px;
+  margin: 0 auto;
+}

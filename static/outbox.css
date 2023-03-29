@@ -1,0 +1,28 @@
+.note {
+  border-radius: 1em;
+  border: 1px solid;
+  padding: 2em;
+}
+
+.timeline {
+  display: grid;
+  gap: 3em;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+
+article {
+  display: grid;
+  gap: 1em;
+}
+
+.article {
+  grid-auto-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+p {
+  margin: 0;
+  font-size: 1.5em;
+}

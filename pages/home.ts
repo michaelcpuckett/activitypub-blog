@@ -20,6 +20,9 @@ editProfileFormElement?.addEventListener('submit', (event) => {
       '[name="summary"]',
     )?.value ?? '';
 
+  const converter = new showdown.Converter();
+  const htmlSummary = converter.makeHtml(summary);
+
   fetch(outboxUrl, {
     method: 'POST',
     headers: {
@@ -33,7 +36,7 @@ editProfileFormElement?.addEventListener('submit', (event) => {
       object: {
         id: actorId,
         name,
-        summary,
+        summary: htmlSummary,
       },
     }),
   })
@@ -64,6 +67,9 @@ newMicroblogStatusFormElement?.addEventListener('submit', (event) => {
       '[name="content"]',
     )?.value ?? '';
 
+  const converter = new showdown.Converter();
+  const htmlContent = converter.makeHtml(content);
+
   fetch(outboxUrl, {
     method: 'POST',
     headers: {
@@ -76,7 +82,7 @@ newMicroblogStatusFormElement?.addEventListener('submit', (event) => {
       to: ['https://www.w3.org/ns/activitystreams#Public', followersUrl],
       object: {
         type: 'Note',
-        content,
+        content: htmlContent,
       },
     }),
   })
@@ -111,6 +117,7 @@ newBlogPostFormElement?.addEventListener('submit', (event) => {
 
   const converter = new showdown.Converter();
   const htmlContent = converter.makeHtml(content);
+  const htmlSummary = converter.makeHtml(summary);
 
   fetch(outboxUrl, {
     method: 'POST',
@@ -124,7 +131,7 @@ newBlogPostFormElement?.addEventListener('submit', (event) => {
       to: ['https://www.w3.org/ns/activitystreams#Public', followersUrl],
       object: {
         type: 'Article',
-        summary,
+        summary: htmlSummary,
         content: htmlContent,
         source: {
           content,

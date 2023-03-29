@@ -1,12 +1,15 @@
 {% macro blogPostPage() %}
 <!doctype html>
 <meta charset="utf-8" />
-<title>{{ entity.summary }}</title>
+<title>{{ entity.summary | safe}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<main>
+<link rel="stylesheet" href="/public.css" />
+<header class="header">
   <h1>
-    {{ entity.summary }}
+    {{ entity.summary | striptags }}
   </h1>
+</header>
+<main>
   <time datetime="{{ entity.published | formatDate }}">
     {{ entity.published | formatDate }}
   </time>

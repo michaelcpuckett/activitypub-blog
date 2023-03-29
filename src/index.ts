@@ -21,25 +21,6 @@ import { FirebaseAuthAdapter } from 'activitypub-core-auth-firebase';
 import { FtpStorageAdapter } from 'activitypub-core-storage-ftp';
 import { DeliveryAdapter } from 'activitypub-core-delivery';
 
-const SingleUserBlogPlugin: Plugin = {
-  async getEntityPageProps(entity) {
-    if (
-      entity.name === 'Outbox' &&
-      entity.type === AP.CollectionTypes.ORDERED_COLLECTION
-    ) {
-      assertIsApCollection(entity);
-
-      return {
-        actor:
-          entity.attributedTo instanceof URL
-            ? await this.adapters.db.findEntityById(entity.attributedTo)
-            : null,
-        outbox: await this.adapters.db.expandCollection(entity),
-      };
-    }
-  },
-};
-
 (async () => {
   // Use Express for all routes.
   const app = express.default();
@@ -170,16 +151,32 @@ const SingleUserBlogPlugin: Plugin = {
     },
   });
 
-  // Use the activitypub-core Express plugin.
-
   app.use(
     activityPub({
-      // TODO plugins key shouldnt be needed
-      plugins: [SingleUserBlogPlugin],
+      plugins: [
+        {
+          async getEntityPageProps(entity) {
+            if (
+              entity.name === 'Outbox' &&
+              entity.type === AP.CollectionTypes.ORDERED_COLLECTION
+            ) {
+              assertIsApCollection(entity);
+
+              return {
+                actor:
+                  entity.attributedTo instanceof URL
+                    ? await this.adapters.db.findEntityById(entity.attributedTo)
+                    : null,
+                outbox: await this.adapters.db.expandCollection(entity),
+              };
+            }
+          },
+        },
+      ],
 
       routes: {
-        person: '/about',
-        inbox: '/inbox',
+        person: '/profile',
+        inbox: '/feed',
         outbox: '/',
         followers: '/followers',
         following: '/following',
